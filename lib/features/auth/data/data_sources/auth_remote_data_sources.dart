@@ -2,7 +2,7 @@ import 'package:blog_app/core/error/exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract interface class AuthRemoteDataSource {
-  Future<String> signUpWithEmailPassword({
+  Future<String> signUpWithEmailAndPassword({
     required String name,
     required String email,
     required String password,
@@ -21,12 +21,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<String> loginWithEmailPassword({
     required String email,
     required String password,
-  }) {
-    
+  }) async {
+    try {
+      final response = await supabaseClient.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      if (response.user == null) {
+        throw ServerException('Login failed!');
+      }
+      return response.user!.id;
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
   }
 
   @override
-  Future<String> signUpWithEmailPassword({
+  Future<String> signUpWithEmailAndPassword({
     required String name,
     required String email,
     required String password,
