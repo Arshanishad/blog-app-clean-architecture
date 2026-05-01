@@ -52,7 +52,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(height: 20,),
                     AuthGradientButton(
                       buttonText: 'Sign Up',
-                    
+                      onPressed: (){
+                        
+                      }
                       ),
                       SizedBox(height: 20,),
                       GestureDetector(
