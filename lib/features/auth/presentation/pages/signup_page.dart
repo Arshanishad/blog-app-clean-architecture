@@ -14,7 +14,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-    final formkey=GlobalKey();
+    final formkey=GlobalKey<FormState>();
     final emailController=TextEditingController();
     final passwordController=TextEditingController();
     final nameController=TextEditingController();
@@ -50,7 +50,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(height: 15,),
                     AuthField(hintText: 'Password',controller: passwordController,isObscureText: true,),
                     SizedBox(height: 20,),
-                    AuthGradientButton(buttonText: 'Sign Up',),
+                    AuthGradientButton(
+                      buttonText: 'Sign Up',
+                    
+                      ),
                       SizedBox(height: 20,),
                       GestureDetector(
                         onTap: (){
