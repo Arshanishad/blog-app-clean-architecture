@@ -8,6 +8,7 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserSignUp _userSignUp;
 
+//dependency injection 
   AuthBloc({
     required UserSignUp userSignUp,
   })  : _userSignUp = userSignUp,
