@@ -34,10 +34,8 @@ void _initAuth() {
     () => UserSignUp(authRepository: serviceLocator()),
   );
 
-  
   //Bloc
   serviceLocator.registerFactory(
     () => AuthBloc(userSignUp: serviceLocator()),
   );
-
 }
