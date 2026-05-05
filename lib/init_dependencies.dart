@@ -1,6 +1,7 @@
 import 'package:blog_app/core/secrets/app_secrets.dart';
 import 'package:blog_app/features/auth/data/data_sources/auth_remote_data_sources.dart';
 import 'package:blog_app/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:blog_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:blog_app/features/auth/domain/usecases/user_sign_up.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -14,22 +15,29 @@ Future<void> initDependencies() async {
   );
   //Supabase
   serviceLocator.registerLazySingleton<SupabaseClient>(() => supabase.client);
+  _initAuth();
+}
+
+void _initAuth() {
   //DataSource
-  serviceLocator.registerLazySingleton<AuthRemoteDataSourceImpl>(
+  serviceLocator.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(serviceLocator()),
   );
-  //Repository
-  serviceLocator.registerLazySingleton<AuthRepositoryImpl>(
+
+   //Repository
+  serviceLocator.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(serviceLocator()),
   );
+
   //Usecase
   serviceLocator.registerLazySingleton(
     () => UserSignUp(authRepository: serviceLocator()),
   );
+
+  
   //Bloc
-  serviceLocator.registerLazySingleton(
+  serviceLocator.registerFactory(
     () => AuthBloc(userSignUp: serviceLocator()),
   );
-}
 
-void _initAuth() {}
+}

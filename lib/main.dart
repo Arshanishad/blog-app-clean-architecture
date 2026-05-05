@@ -9,7 +9,13 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //  Initialize dependencies (Supabase + DI)
   await initDependencies();
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+      BlocProvider(create: (_) => serviceLocator<AuthBloc>())
+      ],
+   child: const MyApp()),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -17,24 +23,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        // Auth Bloc from GetIt
-        BlocProvider<AuthBloc>(
-          create: (_) => serviceLocator<AuthBloc>(),
-        ),
+    return 
+    // MultiBlocProvider(
+    //   providers: [
+    //     // Auth Bloc from GetIt
+    //     BlocProvider<AuthBloc>(create: (_) => serviceLocator<AuthBloc>()),
 
-        // Add more blocs like this
-        // BlocProvider<BlogBloc>(
-        //   create: (_) => serviceLocator<BlogBloc>(),
-        // ),
-      ],
-      child: MaterialApp(
+    //     // Add more blocs like this
+    //     // BlocProvider<BlogBloc>(
+    //     //   create: (_) => serviceLocator<BlogBloc>(),
+    //     // ),
+    //   ],
+      // child:
+       MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Blog App',
         theme: AppTheme.darkThemeMode,
         home: const LoginPage(),
-      ),
+      // ),
     );
   }
 }
