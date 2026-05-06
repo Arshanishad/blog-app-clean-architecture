@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                           Navigator.push(context,SignUpPage.route());
                         },
                         child: RichText(text: TextSpan(
-                            text: 'Don\'t have and account? ',
+                            text: 'Don\'t have an account? ',
                             style: Theme.of(context).textTheme.titleMedium,
                             children: [
                                 TextSpan(
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
                                         fontWeight: FontWeight.bold,
                                     ),
                                 ),
-                            ]
+                            ],
                         ),
                         ),
                       ),
