@@ -14,12 +14,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-    final formkey=GlobalKey();
+    final formkey=GlobalKey<FormState>();
     final emailController=TextEditingController();
     final passwordController=TextEditingController();
 
     @override
-  void dispose() {
+    void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
