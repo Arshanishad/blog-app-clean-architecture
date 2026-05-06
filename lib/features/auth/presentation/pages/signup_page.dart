@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpPage extends StatefulWidget {
-  static MaterialPageRoute<dynamic> route() =>
-      MaterialPageRoute(builder: (context) => SignUpPage());
+  static MaterialPageRoute<dynamic> route() => MaterialPageRoute(builder: (context) => SignUpPage());
   const SignUpPage({super.key});
 
   @override
@@ -88,7 +87,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                     child: RichText(
                       text: TextSpan(
-                        text: 'Don\'t have and account? ',
+                        // text: 'Don\'t have and account? ',
+                         text: 'Already have an account? ',
                         style: Theme.of(context).textTheme.titleMedium,
                         children: [
                           TextSpan(
