@@ -11,7 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 //dependency injection 
   AuthBloc({
     required UserSignUp userSignUp,
-  })  : _userSignUp = userSignUp,
+  }): _userSignUp = userSignUp,
         super(AuthInitial()) {
 
     on<AuthSignUp>((event, emit) async {
