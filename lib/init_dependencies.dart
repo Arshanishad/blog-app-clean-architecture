@@ -35,7 +35,7 @@ void _initAuth() {
   );
 
   //Bloc
-  serviceLocator.registerFactory(
+  serviceLocator.registerLazySingleton(
     () => AuthBloc(userSignUp: serviceLocator()),
   );
 }
