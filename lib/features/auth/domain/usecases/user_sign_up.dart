@@ -1,4 +1,4 @@
-import 'package:blog_app/core/theme/error/failure.dart';
+import 'package:blog_app/core/error/failure.dart';
 import 'package:blog_app/core/usecase/usecase.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';

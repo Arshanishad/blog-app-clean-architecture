@@ -1,5 +1,5 @@
 import 'package:blog_app/core/error/exceptions.dart';
-import 'package:blog_app/core/theme/error/failure.dart';
+import 'package:blog_app/core/error/failure.dart';
 import 'package:blog_app/features/auth/data/data_sources/auth_remote_data_sources.dart';
 import 'package:blog_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:fpdart/fpdart.dart';
