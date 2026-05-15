@@ -5,7 +5,7 @@ import 'package:blog_app/features/auth/presentation/widgets/auth_gradient_button
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  static MaterialPageRoute<dynamic> route()=>MaterialPageRoute(builder: (context) => LoginPage(),);
+  static MaterialPageRoute<dynamic> route()=>MaterialPageRoute(builder: (context) => LoginPage());
 
   const LoginPage({super.key});
 
@@ -27,50 +27,48 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Form(
-              key:formkey ,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                      Text('Sign In.',style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                      ),),
-                      SizedBox(height: 30,),
-                      AuthField(hintText: 'Email',controller: emailController,),
-                      SizedBox(height: 15,),
-                      AuthField(hintText: 'Password',controller: passwordController,isObscureText: true,),
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Form(
+            key:formkey ,
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                    Text('Sign In.',style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                    ),),
+                    SizedBox(height: 30,),
+                    AuthField(hintText: 'Email',controller: emailController,),
+                    SizedBox(height: 15,),
+                    AuthField(hintText: 'Password',controller: passwordController,isObscureText: true,),
+                    SizedBox(height: 20,),
+                    AuthGradientButton(
+                      onPressed: () {
+                        
+                      },
+                      buttonText: 'Sign In',),
                       SizedBox(height: 20,),
-                      AuthGradientButton(
-                        onPressed: () {
-                          
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context,SignUpPage.route());
                         },
-                        buttonText: 'Sign In',),
-                        SizedBox(height: 20,),
-                        GestureDetector(
-                          onTap: (){
-                            Navigator.push(context,SignUpPage.route());
-                          },
-                          child: RichText(text: TextSpan(
-                              text: 'Don\'t have an account? ',
-                              style: Theme.of(context).textTheme.titleMedium,
-                              children: [
-                                  TextSpan(
-                                      text: 'Sign Up',
-                                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                          color: AppPallete.gradient2,
-                                          fontWeight: FontWeight.bold,
-                                      ),
-                                  ),
-                              ],
-                          ),
-                          ),
+                        child: RichText(text: TextSpan(
+                            text: 'Don\'t have an account? ',
+                            style: Theme.of(context).textTheme.titleMedium,
+                            children: [
+                                TextSpan(
+                                    text: 'Sign Up',
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                        color: AppPallete.gradient2,
+                                        fontWeight: FontWeight.bold,
+                                    ),
+                                ),
+                            ],
                         ),
-                  ],
-              ),
+                        ),
+                      ),
+                ],
             ),
           ),
         ),
