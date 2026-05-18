@@ -1,5 +1,6 @@
 import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
+import 'package:blog_app/core/utils/show_snackbar.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/login_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
@@ -40,7 +41,7 @@ class _SignUpPageState extends State<SignUpPage> {
       Navigator.pushReplacement(context, LoginPage.route());
         }
         if(state is AuthFailure){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message)));
+          showSnackbar(context, state.message);
         }
         },
         builder: (context, state) {

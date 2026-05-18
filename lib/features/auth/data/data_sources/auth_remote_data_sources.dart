@@ -29,7 +29,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         password: password,
       );
       if (response.user == null) {
-        throw ServerException('Login failed!');
+        throw ServerException('User is null!');
       }
       return UserModel.fromJson(response.user!.toJson());
     } catch (e) {
