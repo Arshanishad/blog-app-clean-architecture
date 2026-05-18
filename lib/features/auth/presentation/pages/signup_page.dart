@@ -35,9 +35,6 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if(state is AuthLoading){
-            return  Loader();
-          }
          if(state is AuthSuccess){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SignUp Successful')));
       Navigator.pushReplacement(context, LoginPage.route());
@@ -47,6 +44,9 @@ class _SignUpPageState extends State<SignUpPage> {
         }
         },
         builder: (context, state) {
+          if(state is AuthLoading){
+            return const  Loader();
+          }
           return Padding(
             padding: const EdgeInsets.all(15.0),
             child: Form(
