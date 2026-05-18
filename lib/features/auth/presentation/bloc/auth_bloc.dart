@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:blog_app/core/usecase/usecase.dart';
+import 'package:blog_app/features/auth/domain/usecases/current_user.dart';
 import 'package:blog_app/features/auth/domain/usecases/user_login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,22 +14,35 @@ part 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserSignUp _userSignUp;
   final UserLogin _userLogin;
+  final CurrentUser _currentUser;
 
   // dependency injection
   AuthBloc({
     required UserSignUp userSignUp,
     required UserLogin UserLogin,
-  })  : _userSignUp = userSignUp,
-  _userLogin=UserLogin,
-        super(AuthInitial()) {
+    required CurrentUser currentUser,
+  }) : _userSignUp = userSignUp,
+       _userLogin = UserLogin,
+       _currentUser = currentUser,
+       super(AuthInitial()) {
     on<AuthSignUp>(_onAuthSignUp);
     on<AuthLogin>(_onAuthLogin);
+    on<AuthIsUserLoggedIn>(_isUserLoggedIn);
   }
 
-  Future<void> _onAuthSignUp(
-    AuthSignUp event,
+  void _isUserLoggedIn(
+    AuthIsUserLoggedIn event,
     Emitter<AuthState> emit,
   ) async {
+    final res = await _currentUser(NoParams());
+    res.fold((l) => emit(AuthFailure(l.message)), (r){
+      print(r.id);
+        emit(AuthSuccess(r));
+    });
+  }
+
+
+  Future<void> _onAuthSignUp(AuthSignUp event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
 
     final res = await _userSignUp(
@@ -44,12 +59,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-   Future<void> _onAuthLogin(
-    AuthLogin event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onAuthLogin(AuthLogin event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    final res =await _userLogin(UserLoginParams(email: event.email, password: event.password));
-    res.fold((l) =>emit(AuthFailure(l.message)) , (r)=>emit(AuthSuccess(r)));
-}
+    final res = await _userLogin(
+      UserLoginParams(email: event.email, password: event.password),
+    );
+    res.fold((l) => emit(AuthFailure(l.message)), (r) => emit(AuthSuccess(r)));
+  }
 }

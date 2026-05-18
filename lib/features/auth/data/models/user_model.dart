@@ -13,6 +13,5 @@ class UserModel extends User {
        id: map['id']??""
        );
     }
-
     }
 
