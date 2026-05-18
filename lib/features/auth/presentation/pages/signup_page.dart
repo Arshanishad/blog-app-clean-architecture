@@ -34,6 +34,9 @@ class _SignUpPageState extends State<SignUpPage> {
       appBar: AppBar(),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
+          if(state is AuthLoading){
+            
+          }
          if(state is AuthSuccess){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SignUp Successful')));
       Navigator.pushReplacement(context, LoginPage.route());
