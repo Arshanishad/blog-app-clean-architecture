@@ -1,3 +1,4 @@
+import 'package:blog_app/core/common/widgets/loader.dart';
 import 'package:blog_app/core/theme/app_pallete.dart';
 import 'package:blog_app/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:blog_app/features/auth/presentation/pages/login_page.dart';
@@ -35,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if(state is AuthLoading){
-            
+            return  Loader();
           }
          if(state is AuthSuccess){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('SignUp Successful')));
