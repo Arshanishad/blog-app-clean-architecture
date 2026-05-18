@@ -15,7 +15,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
     required String password,
   }) async {
-    return _getUser(() => remoteDataSource.loginWithEmailPassword(
+    return _getUser(()async => await  remoteDataSource.loginWithEmailPassword(
           email: email,
           password: password,
         ));
@@ -27,7 +27,7 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
     required String name,
   }) async {
-    return _getUser(() => remoteDataSource.signUpWithEmailAndPassword(
+    return _getUser(()async  => await remoteDataSource.signUpWithEmailAndPassword(
           name: name,
           email: email,
           password: password,
