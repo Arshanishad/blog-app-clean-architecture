@@ -9,8 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
-  static MaterialPageRoute<dynamic> route() =>
-      MaterialPageRoute(builder: (context) => LoginPage());
+  static MaterialPageRoute<dynamic> route() =>MaterialPageRoute(builder: (context) => LoginPage());
 
   const LoginPage({super.key});
 
