@@ -37,23 +37,21 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return 
-    // MultiBlocProvider(
-    //   providers: [
-    //     // Auth Bloc from GetIt
-    //     BlocProvider<AuthBloc>(create: (_) => serviceLocator<AuthBloc>()),
-
-    //     // Add more blocs like this
-    //     // BlocProvider<BlogBloc>(
-    //     //   create: (_) => serviceLocator<BlogBloc>(),
-    //     // ),
-    //   ],
-      // child:
-       MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Blog App',
-        theme: AppTheme.darkThemeMode,
-        home: const LoginPage(),
-      // ),
-    );
+       BlocSelector<AppUserCubit, AppUserState, bool>(
+         selector: (state) {
+           return state is AppUserLoggedIn;
+         },
+         builder: (context, isLoggedIn) {
+          if(isLoggedIn){
+                Scaffold(body: Center(
+                  child: Text('Logged In !'),
+                ));
+          }
+           return MaterialApp(
+               debugShowCheckedModeBanner: false,
+               title: 'Blog App',
+               theme: AppTheme.darkThemeMode,
+               home: const LoginPage());
+         });
   }
 }
