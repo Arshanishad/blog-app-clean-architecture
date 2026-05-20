@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
          },
          builder: (context, isLoggedIn) {
           if(isLoggedIn){
-               BlogPage();
+             return const   BlogPage();
           }
            return MaterialApp(
                debugShowCheckedModeBanner: false,
