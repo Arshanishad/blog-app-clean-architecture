@@ -27,7 +27,6 @@ serviceLocator.registerLazySingleton(()=>AppUserCubit());
   _initAuth();
 }
 
-
 void _initAuth() {
   // DataSource
   serviceLocator.registerFactory<AuthRemoteDataSource>(
