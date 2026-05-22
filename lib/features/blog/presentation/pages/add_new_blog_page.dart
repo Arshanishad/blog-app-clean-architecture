@@ -1,4 +1,5 @@
 import 'package:blog_app/core/theme/app_pallete.dart';
+import 'package:blog_app/features/blog/presentation/widgets/blog_editor.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,14 @@ class AddNewBlogPage extends StatefulWidget {
 }
 
 class _AddNewBlogPageState extends State<AddNewBlogPage> {
+  final titleController=TextEditingController();
+  final contentController=TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+    contentController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +44,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
               color: AppPallete.borderColor,
               strokeWidth: 1,
               strokeCap: StrokeCap.round,
-              child: Container(
+              child: SizedBox(
                 height: 150,
                 width: double.infinity,
                 child: const Column(
@@ -51,6 +60,27 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 20,),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+              'Technology',
+              'Business',
+              'Programming',
+              'Entertainment'
+              ].map((e)=>Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Chip(
+                  side: const BorderSide(
+                    color: AppPallete.borderColor,
+                  ),
+                  label: Text(e)),
+              )).toList(),
+            ),
+          ),
+          const SizedBox(height: 10,),
+          BlogEditor(controller: titleController, hintText: 'Blog title'),
           ],
         ),
       ),
