@@ -21,15 +21,15 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
   final titleController = TextEditingController();
   final contentController = TextEditingController();
   List<String> selectedTopics = [];
-  File?image;
+  File? image;
 
   void selectImage() async {
-  final pickedImage=await  pickImage();
-  if(pickedImage!=null){
-    setState(() {
-      image=pickedImage;
-    });
-  }
+    final pickedImage = await pickImage();
+    if (pickedImage != null) {
+      setState(() {
+        image = pickedImage;
+      });
+    }
   }
 
   @override
@@ -52,35 +52,46 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              image!=null?SizedBox(
-                height: 150,
-                width: double.infinity,
-                child: Image.file(image!)):
-              GestureDetector(
-                onTap: (){
-                  selectImage();
-                },
-                child: DottedBorder(
-                  borderType: BorderType.RRect,
-                  radius: const Radius.circular(10),
-                  dashPattern: const [10, 4],
-                  color: AppPallete.borderColor,
-                  strokeWidth: 1,
-                  strokeCap: StrokeCap.round,
-                  child: SizedBox(
-                    height: 150,
-                    width: double.infinity,
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.folder_open, size: 40),
-                        SizedBox(height: 15),
-                        Text('Select your image', style: TextStyle(fontSize: 15)),
-                      ],
+              image != null
+                  ? GestureDetector(
+                    onTap:selectImage,
+                    child: SizedBox(
+                        height: 150,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.file(image!, fit: BoxFit.cover),
+                        ),
+                      ),
+                  )
+                  : GestureDetector(
+                      onTap: () {
+                        selectImage();
+                      },
+                      child: DottedBorder(
+                        borderType: BorderType.RRect,
+                        radius: const Radius.circular(10),
+                        dashPattern: const [10, 4],
+                        color: AppPallete.borderColor,
+                        strokeWidth: 1,
+                        strokeCap: StrokeCap.round,
+                        child: SizedBox(
+                          height: 150,
+                          width: double.infinity,
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.folder_open, size: 40),
+                              SizedBox(height: 15),
+                              Text(
+                                'Select your image',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
               const SizedBox(height: 20),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
