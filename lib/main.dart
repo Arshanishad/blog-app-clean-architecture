@@ -9,16 +9,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //  Initialize dependencies (Supabase + DI)
+
+  // Initialize dependencies (Supabase + DI)
   await initDependencies();
+
   runApp(
     MultiBlocProvider(
       providers: [
-      BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
-      BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
-      
+        BlocProvider(create: (_) => serviceLocator<AppUserCubit>()),
+        BlocProvider(create: (_) => serviceLocator<AuthBloc>()),
       ],
-   child: const MyApp()),
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -30,27 +32,35 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   @override
   void initState() {
     super.initState();
+
+    // Check if user already logged in
     context.read<AuthBloc>().add(AuthIsUserLoggedIn());
   }
+
   @override
   Widget build(BuildContext context) {
-    return 
-       BlocSelector<AppUserCubit, AppUserState, bool>(
-         selector: (state) {
-           return state is AppUserLoggedIn;
-         },
-         builder: (context, isLoggedIn) {
-          if(isLoggedIn){
-             return const   BlogPage();
-          }
-           return MaterialApp(
-               debugShowCheckedModeBanner: false,
-               title: 'Blog App',
-               theme: AppTheme.darkThemeMode,
-               home: const LoginPage());
-         });
+    return BlocSelector<AppUserCubit, AppUserState, bool>(
+      selector: (state) {
+        return state is AppUserLoggedIn;
+      },
+      builder: (context, isLoggedIn) {
+
+        // ✅ ALWAYS return MaterialApp
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Blog App',
+          theme: AppTheme.darkThemeMode,
+
+          // ✅ Switch screen here
+          home: isLoggedIn
+              ? const BlogPage()
+              : const LoginPage(),
+        );
+      },
+    );
   }
 }
