@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // Initialize dependencies (Supabase + DI)
   await initDependencies();
 
@@ -36,8 +35,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-
-    // Check if user already logged in
     context.read<AuthBloc>().add(AuthIsUserLoggedIn());
   }
 
@@ -48,14 +45,10 @@ class _MyAppState extends State<MyApp> {
         return state is AppUserLoggedIn;
       },
       builder: (context, isLoggedIn) {
-
-        // ✅ ALWAYS return MaterialApp
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Blog App',
           theme: AppTheme.darkThemeMode,
-
-          // ✅ Switch screen here
           home: isLoggedIn
               ? const BlogPage()
               : const LoginPage(),
