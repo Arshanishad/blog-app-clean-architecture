@@ -97,7 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       },
                       child: RichText(
                         text: TextSpan(
-                          // text: 'Don\'t have and account? ',
+                          // text: 'Don\'t have an account? ',
                           text: 'Already have an account? ',
                           style: Theme.of(context).textTheme.titleMedium,
                           children: [
