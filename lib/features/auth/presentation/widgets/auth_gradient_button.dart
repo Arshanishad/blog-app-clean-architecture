@@ -17,7 +17,6 @@ class AuthGradientButton extends StatelessWidget {
           colors:[
           AppPallete.gradient1,
           AppPallete.gradient2,
-          // AppPallete.gradient3
         ])
       ),
       child: ElevatedButton(
