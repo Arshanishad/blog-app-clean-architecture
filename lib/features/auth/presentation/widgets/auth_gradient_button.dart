@@ -27,7 +27,7 @@ class AuthGradientButton extends StatelessWidget {
           fixedSize: Size(395, 55)
         ),
        onPressed: onPressed,
-      child: Text(buttonText,style: TextStyle(
+       child: Text(buttonText,style: TextStyle(
         fontSize: 17,
         fontWeight: FontWeight.w600,
       ),)),
